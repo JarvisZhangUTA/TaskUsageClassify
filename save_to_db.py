@@ -26,9 +26,9 @@ def handle_file(zip_file):
         log = log_file.read()
         if zip_file in log: 
             return
-#    with open('log.txt', 'a') as log_file:
-#        log_file.write(zip_file + ' start\n')
-#        log_file.close()
+   with open('log.txt', 'a') as log_file:
+       log_file.write(zip_file + ' start\n')
+       log_file.close()
 
     with gzip.open('task_usage/' + zip_file, 'rb') as zipped_file:
         csv_file = csv.reader(zipped_file, delimiter=' ', quotechar=' ')
@@ -58,16 +58,14 @@ def handle_file(zip_file):
         log_file.write(zip_file + ' end\n')
         log_file.close()
 
-handle_file('part-00000-of-00500.csv.gz')
+zips = os.listdir("task_usage")
 
-# zips = os.listdir("task_usage")
+threads = []
+index = 0
+while index < len(zips):
+    thread = Thread(target=handle_file, args=(zips[index], ))
+    thread.start()
 
-# threads = []
-# index = 0
-# while index < len(zips):
-#     thread = Thread(target=handle_file, args=(zips[index], ))
-#     thread.start()
-
-# # join all threads
-# for thread in threads:
-#     thread.join()
+# join all threads
+for thread in threads:
+    thread.join()
