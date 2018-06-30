@@ -36,8 +36,8 @@ def handle_file(zip_file):
 
         for idx,row in enumerate(csv_file):
             row_data = map(zero_fill, row[0].split(','))
-                row_data[0] = str( int( int(row_data[0]) / 1000 ) )
-                row_data[1] = str( int( int(row_data[1]) / 1000 ) )
+            row_data[0] = str( int( int(row_data[0]) / 1000 ) )
+            row_data[1] = str( int( int(row_data[1]) / 1000 ) )
 
             table_name = 'job_ids_mod_' + str( int(row_data[2]) % 2 )	    
             if table_name not in collects:
