@@ -26,7 +26,7 @@ def handle_file(zip_file):
         log = log_file.read()
         if zip_file in log: 
             return
-   with open('log.txt', 'a') as log_file:
+    with open('log.txt', 'a') as log_file:
        log_file.write(zip_file + ' start\n')
        log_file.close()
 
@@ -39,7 +39,7 @@ def handle_file(zip_file):
             row_data[0] = str( int( int(row_data[0]) / 1000 ) )
             row_data[1] = str( int( int(row_data[1]) / 1000 ) )
 
-            table_name = 'job_ids_mod_' + str( int(row_data[2]) % 2 )	    
+            table_name = 'job_ids_mod_' + str( int(row_data[2]) % 50 )	    
             if table_name not in collects:
                 collects[table_name] = []
             collects[table_name].append(row_data)		
