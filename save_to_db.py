@@ -11,24 +11,30 @@ def zero_fill(field):
     return field
 
 def handle_file(zip_file):
-    connection = pymysql.connect(host='localhost', port=3306, user='admin', password='qgk112358', db='cluster', cursorclass=pymysql.cursors.DictCursor)
+    connection = pymysql.connect(host='localhost', port=3306, user='root', db='cluster', cursorclass=pymysql.cursors.DictCursor)
     cursor = connection.cursor()
+
     with open('log.txt', 'r') as log_file:
         log = log_file.read()
         if zip_file in log: 
             return
-    with open('log.txt', 'a') as log_file:
-        log_file.write(zip_file + ' start\n')
-        log_file.close()
+#    with open('log.txt', 'a') as log_file:
+#        log_file.write(zip_file + ' start\n')
+#        log_file.close()
+
     with gzip.open('task_usage/' + zip_file, 'rb') as zipped_file:
         csv_file = csv.reader(zipped_file, delimiter=' ', quotechar=' ')
-        collect = []
+        collects = {}
         for idx,row in enumerate(csv_file):
-            table_name = 'job_ids_mod_' + str( int(row[2]) % 2 ) 
-            row[0] = str( int( int(row[0]) / 1000 ) )
-            row[1] = str( int( int(row[1]) / 1000 ) )
-            
-            collect.append( [table_name] + map(zero_fill, row[0].split(',')) )
+	    row_data = map(zero_fill, row[0].split(','))
+            row_data[0] = str( int( int(row_data[0]) / 1000 ) )
+            row_data[1] = str( int( int(row_data[1]) / 1000 ) )
+
+	    table_name = 'job_ids_mod_' + str( int(row_data[2]) % 2 )	    
+	    if table_name not in collects:
+	    	collects[table_name] = []
+	    collects[table_name].append(row_data)		
+
             if( len(collect) >= 5000):
                 print 'insert rows from %s idx %s  %s' % (zip_file, idx - 4999, idx)
                 cursor.executemany('insert into %s' + 
