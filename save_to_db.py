@@ -11,7 +11,7 @@ def zero_fill(field):
     return field
 
 def handle_file(zip_file):
-    connection = pymysql.connect(host='localhost', port=3306, user='', password='', db='cluster', cursorclass=pymysql.cursors.DictCursor)
+    connection = pymysql.connect(host='localhost', port=3306, user='admin', password='qgk112358', db='cluster', cursorclass=pymysql.cursors.DictCursor)
     cursor = connection.cursor()
     with open('log.txt', 'r') as log_file:
         log = log_file.read()
@@ -24,7 +24,7 @@ def handle_file(zip_file):
         csv_file = csv.reader(zipped_file, delimiter=' ', quotechar=' ')
         collect = []
         for idx,row in enumerate(csv_file):
-            table_name = 'job_ids_mod_' + str( int(row[2]) % 50 ) 
+            table_name = 'job_ids_mod_' + str( int(row[2]) % 2 ) 
             row[0] = str( int( int(row[0]) / 1000 ) )
             row[1] = str( int( int(row[1]) / 1000 ) )
             
@@ -42,14 +42,16 @@ def handle_file(zip_file):
         log_file.write(zip_file + ' end\n')
         log_file.close()
 
-zips = os.listdir("task_usage")
+handle_file('part-00000-of-00500.csv.gz')
 
-threads = []
-index = 0
-while index < len(zips):
-    thread = Thread(target=handle_file, args=(zips[index], ))
-    thread.start()
+# zips = os.listdir("task_usage")
 
-# join all threads
-for thread in threads:
-    thread.join()
+# threads = []
+# index = 0
+# while index < len(zips):
+#     thread = Thread(target=handle_file, args=(zips[index], ))
+#     thread.start()
+
+# # join all threads
+# for thread in threads:
+#     thread.join()

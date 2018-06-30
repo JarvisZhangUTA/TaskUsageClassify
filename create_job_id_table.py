@@ -1,7 +1,7 @@
 import pymysql.cursors
 
 
-connection = pymysql.connect(host='localhost', port=3306, user='', password='', db='cluster', cursorclass=pymysql.cursors.DictCursor)
+connection = pymysql.connect(host='localhost', port=3306, user='admin', password='qgk112358', db='cluster', cursorclass=pymysql.cursors.DictCursor)
 cursor = connection.cursor()
 
 for mod in range(50):
