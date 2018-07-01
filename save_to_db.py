@@ -18,10 +18,7 @@ def insert_rows(table, data, connection, cursor):
         '(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', data) 
     connection.commit()
 
-def handle_file(zip_file):
-    connection = pymysql.connect(host='localhost', port=3306, user='root', db='cluster', cursorclass=pymysql.cursors.DictCursor)
-    cursor = connection.cursor()
-
+def handle_file(zip_file, connection, cursor):
     with open('log.txt', 'r') as log_file:
         log = log_file.read()
         if zip_file in log: 
@@ -44,7 +41,7 @@ def handle_file(zip_file):
                 collects[table_name] = []
             collects[table_name].append(row_data)		
 
-            if len( collects[table_name] ) >= 10000:
+            if len( collects[table_name] ) >= 20000:
                 print 'insert rows from %s' % (zip_file)
                 insert_rows(table_name, collects[table_name], connection, cursor)
                 collects[table_name] = []
@@ -58,12 +55,17 @@ def handle_file(zip_file):
         log_file.write(zip_file + ' end\n')
         log_file.close()
 
-zips = os.listdir("task_usage")
+def handle_files(files):
+    connection = pymysql.connect(host='localhost', port=3306, user='root', db='cluster', cursorclass=pymysql.cursors.DictCursor)
+    cursor = connection.cursor()
+    for _file in files:
+        handle_file(_file, connection, cursor)
 
-threads = []
-for zip_file in zips:
-    thread = Thread(target=handle_file, args=(zip_file, ))
+zips = os.listdir("task_usage")
+while index < len(zips):
+    thread = Thread(target=handle_files, args=(zips[index, index + 3], ))
     thread.start()
+    index += 3
 
 # join all threads
 for thread in threads:
