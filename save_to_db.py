@@ -61,9 +61,8 @@ def handle_file(zip_file):
 zips = os.listdir("task_usage")
 
 threads = []
-index = 0
-while index < len(zips):
-    thread = Thread(target=handle_file, args=(zips[index], ))
+for zip_file in zips:
+    thread = Thread(target=handle_file, args=(zip_file, ))
     thread.start()
 
 # join all threads
