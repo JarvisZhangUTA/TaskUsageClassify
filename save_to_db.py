@@ -62,8 +62,10 @@ def handle_files(files):
         handle_file(_file, connection, cursor)
 
 zips = os.listdir("task_usage")
+threads = []
+index = 0
 while index < len(zips):
-    thread = Thread(target=handle_files, args=(zips[index, index + 3], ))
+    thread = Thread(target=handle_files, args=(zips[index: index + 3], ))
     thread.start()
     index += 3
 
