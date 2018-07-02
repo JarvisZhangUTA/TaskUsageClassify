@@ -17,6 +17,7 @@ table_name = 'job_ids_mod_' + str(mod)
 cursor.execute("select job_id, min(start_time) as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id" % (table_name))
 
 for row in cursor:
-  # with open('commands/%s.txt' % row['job_id']) as out_file:
-  command = '%s %s %s %s' % ( row['min'], row['count'], row['avg'], row['durations'])
+  # with open('commands/%s.txt' % row['job_id'], 'a') as out_file:
+  command = '%s %s %s %s' % ( row['min'], row['count'], int(row['avg']), row['durations'])
+    # out_file.write()
   print command
