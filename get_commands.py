@@ -10,14 +10,15 @@ cursor = connection.cursor()
 # 3. avg(end_time - start_time)
 # 4. 5. 6. ... (end_time - start_time) for each task
 
-# for mod in range(50):
-mod = 0
-table_name = 'job_ids_mod_' + str(mod)
+for mod in range(50):
+  table_name = 'job_ids_mod_' + str(mod)
 
-cursor.execute("select job_id, min(start_time) as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id" % (table_name))
+  cursor.execute("select job_id, min(start_time) as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id" % (table_name))
 
-for row in cursor:
-  with open('commands/%s.txt' % row['job_id'], 'a') as out_file:
-    command = '%s %s %s %s \n' % ( row['min'], row['count'], int(row['avg']), row['durations'])
-    out_file.write(command)
-    out_file.close()
+  for row in cursor:
+    with open('commands/%s.txt' % row['job_id'], 'a') as out_file:
+      command = '%s %s %s %s \n' % ( row['min'], row['count'], int(row['avg']), row['durations'])
+      out_file.write(command)
+      out_file.close()
+  
+  print table_name + ' done'
