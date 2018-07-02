@@ -2,6 +2,9 @@ import pymysql.cursors
 import math
 import sys
 
+def strDiv(val):
+  return str( int( int(val) / 1000 ) )
+
 connection = pymysql.connect(host='localhost', port=3306, user='root', db='cluster', cursorclass=pymysql.cursors.DictCursor)
 cursor = connection.cursor()
 
@@ -19,10 +22,10 @@ cursor.execute("select job_id, min(start_time) / 1000 as min, count(*) as count,
 for row in cursor:
 
   # ms to s
-  row['min'] = int(int(row['min']) / 1000)
-  row['avg'] = int(int(row['avg']) / 1000)
+  row['min'] = strDiv( row['min'] )
+  row['avg'] = strDiv( row['avg'] )
   durations = row['durations'].split(' ')
-  durations = map(int, durations)
+  durations = map(strDiv, durations)
   row['durations'] = ' '.join(durations)
 
   with open('commands2/%s.txt' % row['job_id'], 'a') as out_file:
