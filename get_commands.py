@@ -21,9 +21,9 @@ for row in cursor:
   # ms to s
   row['min'] = int(int(row['min']) / 1000)
   row['avg'] = int(int(row['avg']) / 1000)
-  durations = row['durations'].split(',')
+  durations = row['durations'].split(' ')
   durations = map(int, durations)
-  row['durations'] = ','.join(durations)
+  row['durations'] = ' '.join(durations)
 
   with open('commands2/%s.txt' % row['job_id'], 'a') as out_file:
     command = '%s %s %s %s \n' % ( row['min'], row['count'], int(row['avg']), row['durations'])
