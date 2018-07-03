@@ -21,14 +21,14 @@ for mod in range(50):
     # ms to s
     row['min'] = strDiv( row['min'] )
     row['avg'] = strDiv( row['avg'] )
-    
+
     durations = row['durations'].split(' ')
     durations = map(strDiv, durations)
     row['durations'] = ' '.join(durations)
 
-    with open('commands2/%s.txt' % row['job_id'], 'a') as out_file:
+    with open('commands2/combined.txt', 'a') as out_file:
       command = '%s %s %s %s \n' % ( row['min'], row['count'], int(row['avg']), row['durations'])
       out_file.write(command)
       out_file.close()
     
-    print table_name + ' done'
+  print table_name + ' done'
