@@ -12,8 +12,8 @@ cursor = connection.cursor()
 # 2. task count
 # 3. avg(end_time - start_time)
 # 4. 5. 6. ... (end_time - start_time) for each task
-out_file = open('combined_commands.txt', 'a')
-log_file = open('job_id_status.txt', 'a')
+# out_file = open('combined_commands.txt', 'a')
+# log_file = open('job_id_status.txt', 'a')
 
 valid_count = 0
 invalid_count = 0
