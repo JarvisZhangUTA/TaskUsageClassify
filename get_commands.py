@@ -36,7 +36,7 @@ for mod in range(50):
     durations = map(strDiv, durations)
     row['durations'] = ' '.join(durations)
 
-    command = '%s %s %s %s \n' % ( row['min'], row['count'], int(row['avg']), row['durations'])
+    command = '%s %s %s %s \n' % ( row['min'], row['count'], row['avg'], row['durations'])
     print command
 #     out_file.write(command)
 #     log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
