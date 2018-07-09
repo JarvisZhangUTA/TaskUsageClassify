@@ -13,8 +13,8 @@ cursor = connection.cursor()
 # 2. task count
 # 3. avg(end_time - start_time)
 # 4. 5. 6. ... (end_time - start_time) for each task
-# out_file = open('combined_commands.txt', 'a')
-# log_file = open('job_id_status.txt', 'a')
+out_file = open('combined_commands.txt', 'a')
+log_file = open('job_id_status.txt', 'a')
 
 valid_count = 0
 invalid_count = 0
@@ -26,7 +26,7 @@ for mod in range(50):
   for row in cursor:
     if int(row['count']) > 10000:
       invalid_count += 1
-      # log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
+      log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
       continue
 
     # ms to s
@@ -39,15 +39,15 @@ for mod in range(50):
 
     command = '%s %s %s %s \n' % ( row['min'], row['count'], row['avg'], row['durations'])
     print command
-#     out_file.write(command)
-#     log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
+    out_file.write(command)
+    log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
 
-#     valid_count += 1
+    valid_count += 1
     
-#   print table_name + ' done'
+  print table_name + ' done'
 
-# print 'VALID COUNT ' + str(valid_count)
-# print 'INVALID COUNT ' + str(invalid_count)
+print 'VALID COUNT ' + str(valid_count)
+print 'INVALID COUNT ' + str(invalid_count)
 
-# out_file.close()
-# log_file.close()
+out_file.close()
+log_file.close()
