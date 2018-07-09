@@ -3,7 +3,7 @@ import math
 import sys
 
 def strDiv(val):
-  return str( float('%.3f' % (int(val) / 1000) ) )
+  return str( float('%.3f' % ( float('%.3f' % val) / 1000) ) )
 
 connection = pymysql.connect(host='localhost', port=3306, user='root', db='cluster', cursorclass=pymysql.cursors.DictCursor)
 cursor = connection.cursor()
