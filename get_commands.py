@@ -3,7 +3,7 @@ import math
 import sys
 
 def strDiv(val):
-  return str( int( int(val) / 1000 ) )
+  return str( float('%.3f' % int(val) / 1000 ) )
 
 connection = pymysql.connect(host='localhost', port=3306, user='root', db='cluster', cursorclass=pymysql.cursors.DictCursor)
 cursor = connection.cursor()
@@ -37,15 +37,15 @@ for mod in range(50):
     row['durations'] = ' '.join(durations)
 
     command = '%s %s %s %s \n' % ( row['min'], row['count'], int(row['avg']), row['durations'])
-    out_file.write(command)
-    log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
+#     out_file.write(command)
+#     log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
 
-    valid_count += 1
+#     valid_count += 1
     
-  print table_name + ' done'
+#   print table_name + ' done'
 
-print 'VALID COUNT ' + str(valid_count)
-print 'INVALID COUNT ' + str(invalid_count)
+# print 'VALID COUNT ' + str(valid_count)
+# print 'INVALID COUNT ' + str(invalid_count)
 
-out_file.close()
-log_file.close()
+# out_file.close()
+# log_file.close()
