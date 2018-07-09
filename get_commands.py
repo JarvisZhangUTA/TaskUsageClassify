@@ -25,7 +25,7 @@ for mod in range(50):
   for row in cursor:
     if int(row['count']) > 10000:
       invalid_count += 1
-      log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
+      # log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
       continue
 
     # ms to s
@@ -37,6 +37,7 @@ for mod in range(50):
     row['durations'] = ' '.join(durations)
 
     command = '%s %s %s %s \n' % ( row['min'], row['count'], int(row['avg']), row['durations'])
+    print command
 #     out_file.write(command)
 #     log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
 
