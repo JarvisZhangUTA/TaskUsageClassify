@@ -27,7 +27,7 @@ for mod in range(50):
       log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
       continue
     
-    totaltask_duriation = (float( row['avg']) / 1000) * int(row[count])
+    totaltask_duriation = (float( row['avg']) / 1000) * int(row['count'])
     print totaltask_duriation
 
 #     # ms to s
