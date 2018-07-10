@@ -24,7 +24,7 @@ for mod in range(50):
   for row in cursor:
     if int(row['count']) > 10000:
       invalid_count += 1
-      log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
+    #   log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
       continue
     
     totaltask_duriation = (float( row['avg']) / 1000) * int(row['count'])
