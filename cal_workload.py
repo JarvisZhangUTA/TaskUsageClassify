@@ -29,6 +29,6 @@ for mod in range(50):
       continue
     
     totaltask_duriation += float(strDiv( row['totalduriation'] ))
+    print totaltask_duriation
 
-print totaltask_duriation
 
