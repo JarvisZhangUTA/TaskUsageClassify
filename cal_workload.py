@@ -28,10 +28,11 @@ for mod in range(50):
       continue
     
     totaltask_duriation = (float( row['avg']) / 1000) * int(row['count'])
-    print totaltask_duriation
+    # print totaltask_duriation
 
 for total_duriation in totaltask_duriation:
     total += total_duriation
+print total
 
 #     # ms to s
 #     row['min'] = strDiv( row['min'] )
