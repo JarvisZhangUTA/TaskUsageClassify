@@ -21,7 +21,7 @@ invalid_count = 0
 
 for mod in range(50):
   table_name = 'job_ids_mod_' + str(mod)
-  cursor.execute("select job_id, min(start_time) / 1000 as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id" % (table_name))
+  cursor.execute("select job_id, min(start_time) as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id" % (table_name))
 
   for row in cursor:
     if int(row['count']) > 10000:
