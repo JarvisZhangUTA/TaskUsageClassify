@@ -32,7 +32,7 @@ for mod in range(50):
     ms += float(row['totalduriation'])
     totaltask_duriation += float(strDiv( row['totalduriation'] ))
     print "ms" + str(ms)
-    print "s" + totaltask_duriation
+    print "s",totaltask_duriation
 
 
 # 8716521217.0
