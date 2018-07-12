@@ -28,6 +28,7 @@ for mod in range(50):
     #   log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
       continue
     
+    print row['totalduriation']
     totaltask_duriation += float(strDiv( row['totalduriation'] ))
     print totaltask_duriation
 
