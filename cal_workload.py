@@ -17,6 +17,7 @@ cursor = connection.cursor()
 valid_count = 0
 invalid_count = 0
 totaltask_duriation = 0
+ms = 0
 
 for mod in range(50):
   table_name = 'job_ids_mod_' + str(mod)
