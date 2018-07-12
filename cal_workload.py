@@ -31,6 +31,7 @@ for mod in range(50):
     
     ms += float(row['totalduriation'])
     totaltask_duriation += float(strDiv( row['totalduriation'] ))
+    print "毫秒" + ms
     print totaltask_duriation
 
 
