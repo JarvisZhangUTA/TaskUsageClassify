@@ -29,7 +29,7 @@ for mod in range(1):
       log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
       continue
 
-    # ms to s
+    # ms to s /1000
     row['min'] = strDiv( row['min'] )
     row['avg'] = strDiv( row['avg'] )
 
