@@ -13,15 +13,15 @@ cursor = connection.cursor()
 # 2. task count
 # 3. avg(end_time - start_time)
 # 4. 5. 6. ... (end_time - start_time) for each task
-out_file = open('combined_commands.txt', 'a')
+out_file = open('combined_commands_test.txt', 'a')
 log_file = open('job_id_status.txt', 'a')
 
 valid_count = 0
 invalid_count = 0
 
-for mod in range(50):
+for mod in range(1):
   table_name = 'job_ids_mod_' + str(mod)
-  cursor.execute("select job_id, min(start_time) as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id" % (table_name))
+  cursor.execute("select job_id, min(start_time) as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id order by min(start_time) desc" % (table_name))
 
   for row in cursor:
     if int(row['count']) > 10000:
