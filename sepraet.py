@@ -13,7 +13,7 @@ cursor = connection.cursor()
 # 2. task count
 # 3. avg(end_time - start_time)
 # 4. 5. 6. ... (end_time - start_time) for each task
-out_file = open('combined_commands_test.txt', 'a')
+out_file = open('1000.txt', 'a')
 log_file = open('job_id_status.txt', 'a')
 
 valid_count = 0
@@ -29,19 +29,20 @@ for mod in range(50):
       log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
       continue
 
+    if int(row['min']) < 1000
     # ms to s
-    row['min'] = strDiv( row['min'] )
-    row['avg'] = strDiv( row['avg'] )
+        row['min'] = strDiv( row['min'] )
+        row['avg'] = strDiv( row['avg'] )
 
-    durations = row['durations'].split(' ')
-    durations = map(strDiv, durations)
-    row['durations'] = ' '.join(durations)
+        durations = row['durations'].split(' ')
+        durations = map(strDiv, durations)
+        row['durations'] = ' '.join(durations)
 
-    command = '%s %s %s %s \n' % ( row['min'], row['count'], row['avg'], row['durations'])
-    out_file.write(command)
-    log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
+        command = '%s %s %s %s \n' % ( row['min'], row['count'], row['avg'], row['durations'])
+        out_file.write(command)
+        log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
 
-    valid_count += 1
+        valid_count += 1
     
   print table_name + ' done'
 
