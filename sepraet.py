@@ -26,7 +26,7 @@ for mod in range(50):
   for row in cursor:
     if int(row['count']) > 10000 or int(row['min']) > 1000:
       invalid_count += 1
-      log_file.write('%s %s invalid\n' % ( row['job_id'], row['count'], row['min']))
+      log_file.write('%s %s %s invalid\n' % ( row['job_id'], row['count'], row['min']))
       continue
 
     # ms to s
