@@ -1168,6 +1168,7 @@ class Simulation(object):
             for new_event in new_events:
                 self.event_queue.put(new_event)
 
+
         print "Simulation ending, no more events"
         self.jobs_file.close()
 
