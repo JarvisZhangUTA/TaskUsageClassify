@@ -1158,6 +1158,8 @@ class Simulation(object):
 
         while (not self.event_queue.empty()):
             current_time, event = self.event_queue.get()
+            print "current ", current_time
+            print "last ", last_time
             assert current_time >= last_time
             # if current_time <= last_time:
             #     current_time = last_time
