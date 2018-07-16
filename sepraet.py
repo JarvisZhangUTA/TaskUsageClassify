@@ -24,9 +24,9 @@ for mod in range(50):
   cursor.execute("select job_id, min(start_time) as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id order by min(start_time) asc" % (table_name))
 
   for row in cursor:
-    if int(row['count']) > 10000 and int(row['min']) > 1000:
+    if int(row['count']) > 10000 or int(row['min']) > 1000:
       invalid_count += 1
-      log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
+      log_file.write('%s %s invalid\n' % ( row['job_id'], row['count'], row['min']))
       continue
 
     # ms to s
