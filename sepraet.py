@@ -24,25 +24,24 @@ for mod in range(50):
   cursor.execute("select job_id, min(start_time) as min, count(*) as count, avg(end_time - start_time) as avg, group_concat(end_time - start_time SEPARATOR ' ') as durations from %s group by job_id order by min(start_time) desc" % (table_name))
 
   for row in cursor:
-    if int(row['count']) > 10000:
+    if int(row['count']) > 10000 & int(row['min']) > 1000:
       invalid_count += 1
       log_file.write('%s %s invalid\n' % ( row['job_id'], row['count']))
       continue
 
-    if int(row['min']) < 1000
     # ms to s
-        row['min'] = strDiv( row['min'] )
-        row['avg'] = strDiv( row['avg'] )
+    row['min'] = strDiv( row['min'] )
+    row['avg'] = strDiv( row['avg'] )
 
-        durations = row['durations'].split(' ')
-        durations = map(strDiv, durations)
-        row['durations'] = ' '.join(durations)
+    durations = row['durations'].split(' ')
+    durations = map(strDiv, durations)
+    row['durations'] = ' '.join(durations)
 
-        command = '%s %s %s %s \n' % ( row['min'], row['count'], row['avg'], row['durations'])
-        out_file.write(command)
-        log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
+    command = '%s %s %s %s \n' % ( row['min'], row['count'], row['avg'], row['durations'])
+    out_file.write(command)
+    log_file.write('%s %s done\n' % ( row['job_id'], row['count']))
 
-        valid_count += 1
+    valid_count += 1
     
   print table_name + ' done'
 
