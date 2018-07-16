@@ -13,7 +13,7 @@ cursor = connection.cursor()
 # 2. task count
 # 3. avg(end_time - start_time)
 # 4. 5. 6. ... (end_time - start_time) for each task
-out_file = open('10000.txt', 'a')
+out_file = open('100000.txt', 'a')
 log_file = open('job_id_status.txt', 'a')
 
 valid_count = 0
