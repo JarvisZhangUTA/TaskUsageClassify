@@ -1,5 +1,5 @@
 
-f = open('/Users/mac/Code/TaskUsageClassify/1000000.txt')
+f = open('/Users/mac/Code/TaskUsageClassify/10000000.txt')
 out_file = open('/Users/mac/Code/TaskUsageClassify/sort_test.txt', 'a')
 result= []
 iter_f=iter(f)

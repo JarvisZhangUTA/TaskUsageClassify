@@ -1,9 +1,12 @@
 #coding:utf-8
 import sys
 
-f = open('/Users/mac/hawk/eagle/simulation/combined_commands.txt')
+f = open('/Users/mac/Code/data/combined_commands.txt')
 lines = f.readlines()
-print (lines[133])
+print (lines[2926])
+print (lines[2927])
+print (lines[2928])
+print (lines[2929])
 
 first_line = f.readline() 
 off = -50     
